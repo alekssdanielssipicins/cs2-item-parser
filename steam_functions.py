@@ -34,40 +34,47 @@ def find_item(driver, url, float_cap):
     current_float_list=[]
     purchased_float_list=[] #Avoiding Already purchased error
     for inner_div in inner_divs:
-            WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.XPATH, ".//csfloat-item-row-wrapper")))
-            try:
-                csfloat_info = inner_div.find_element(By.XPATH, ".//csfloat-item-row-wrapper")
-            except StaleElementReferenceException:
-                csfloat_info = WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.XPATH, ".//csfloat-item-row-wrapper")))
-            if(csfloat_info.text[0:4]!="Load"):
-                item_float=float(csfloat_info.text[7:20])
-                
-                #Part to fix repeating error
-                current_float_list.append(item_float)
-                if(current_float_list and len(current_float_list)!=1):
-                    if(item_float==current_float_list[0]):
-                        current_float_list=[]
-                        driver.get(url)
-                        time.sleep(1.5)
+        #Code to work with CSFloat extension
+        #WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.XPATH, ".//csfloat-item-row-wrapper")))
+        #try:
+            #csfloat_info=inner_div.find_element(By.XPATH, ".//csfloat-item-row-wrapper")
+        #except StaleElementReferenceException:
+            #csfloat_info=WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.XPATH, ".//csfloat-item-row-wrapper")))
+        #if(csfloat_info.text[0:4]!="Load"):
+            #item_float=float(csfloat_info.text[7:20])
+        sih_info=WebDriverWait(inner_div, 10).until(EC.visibility_of_element_located((By.XPATH, ".//span[@class='value']")))
+        try:
+            item_float=float(sih_info.text)
+        except Exception as e:
+            print(e)
+            break
+
+        #Part to fix repeating error
+        current_float_list.append(item_float)
+        if(current_float_list and len(current_float_list)!=1):
+            if(item_float==current_float_list[0]):
+                current_float_list=[]
+                driver.get(url)
+                time.sleep(1.5)
                 
                 #Buy listing with appropriate float
-                if(item_float<float_cap and item_float not in purchased_float_list):
-                    try:
-                        button = inner_div.find_element(By.CLASS_NAME, "item_market_action_button.btn_green_white_innerfade.btn_small")
-                        button.click()
-                        WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.ID, "market_buynow_dialog_accept_ssa")))
-                        checkbox = driver.find_element(By.ID, "market_buynow_dialog_accept_ssa")
-                        driver.execute_script("arguments[0].scrollIntoView(true);", checkbox) #JavaScript code to sroll down to checkbox
-                        if not checkbox.is_selected():
-                            checkbox.click()
-                        time.sleep(0.01)
-                        button = driver.find_element(By.ID, "market_buynow_dialog_purchase")
-                        button.click()
-                        purchased_float_list.append(item_float)
-                        break
-                    except:
-                        print("Buy error")
-                        break
+        if(item_float<float_cap and item_float not in purchased_float_list):
+            try:
+                button = inner_div.find_element(By.CLASS_NAME, "item_market_action_button.btn_green_white_innerfade.btn_small")
+                button.click()
+                WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.ID, "market_buynow_dialog_accept_ssa")))
+                checkbox = driver.find_element(By.ID, "market_buynow_dialog_accept_ssa")
+                driver.execute_script("arguments[0].scrollIntoView(true);", checkbox) #JavaScript code to sroll down to checkbox
+                if not checkbox.is_selected():
+                    checkbox.click()
+                #time.sleep(0.01)
+                button = driver.find_element(By.ID, "market_buynow_dialog_purchase")
+                button.click()
+                purchased_float_list.append(item_float)
+                break
+            except:
+                print("Buy error")
+                break
     #Information block
     print("Items parsed: "+str(len(current_float_list)))
     print("Min float: "+str(min(current_float_list)))

@@ -11,7 +11,8 @@ import sys
 #loading item float extension
 service = Service()
 option = webdriver.ChromeOptions()
-option.add_extension("float.crx")
+option.add_extension("sih.crx")
+#option.add_extension("float.crx")
 driver = webdriver.Chrome(service=service, options=option)
 
 #openning steam website and waiting for login (to be automatized)
