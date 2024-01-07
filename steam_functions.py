@@ -34,6 +34,16 @@ def find_item(driver, url, float_cap):
     current_float_list=[]
     purchased_float_list=[] #Avoiding Already purchased error
     for inner_div in inner_divs:
+        #Code to display 100 listings instead of 10 (only works in SIH)
+        dropdown_element = driver.find_element(By.ID, "ui-id-1-button")
+        dropdown_element.click()
+        options_locator = (By.CSS_SELECTOR, "#ui-id-1-menu li")
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located(options_locator))
+        options = driver.find_elements(*options_locator)
+        preferred_option = options[3]
+        preferred_option.click()
+        time.sleep(2)
+        
         #Code to work with CSFloat extension
         #WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.XPATH, ".//csfloat-item-row-wrapper")))
         #try:
