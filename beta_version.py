@@ -13,6 +13,15 @@ service = Service()
 option = webdriver.ChromeOptions()
 option.add_extension("sih.crx")
 #option.add_extension("float.crx")
+
+#enter proxy (recommended to use rotatiing proxy)
+print("Enter proxy IP (0 if no proxy): ")
+proxy_ip = input()
+if(not proxy_ip):
+    print("Enter proxy port")
+    proxy_port=input()
+    option.add_argument(f'--proxy-server={proxy_ip}:{proxy_port}')
+
 driver = webdriver.Chrome(service=service, options=option)
 
 #openning steam website and waiting for login (to be automatized)
