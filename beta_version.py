@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from steam_functions import open_listing, find_item
 import time
 import sys
+import pandas
 
 #loading item float extension
 service = Service()
@@ -17,7 +18,7 @@ option.add_extension("sih.crx")
 #enter proxy (recommended to use rotatiing proxy)
 print("Enter proxy IP (0 if no proxy): ")
 proxy_ip = input()
-if(not proxy_ip):
+if not proxy_ip:
     print("Enter proxy port")
     proxy_port=input()
     option.add_argument(f'--proxy-server={proxy_ip}:{proxy_port}')
@@ -30,19 +31,9 @@ driver.get(url)
 print("Please manually login to Steam and press Enter")
 input()
 
-# url input
-# print("Enter link to Steam listing: ")
-# url_input=input()
-# url_list=[]
-# url_list.append(url_input)
-
-#preset
-url_list=["https://steamcommunity.com/market/listings/730/P250%20%7C%20Metallic%20DDPAT%20%28Factory%20New%29", #P250 Metallic DDPAT
-          "https://steamcommunity.com/market/listings/730/MAG-7%20%7C%20Metallic%20DDPAT%20%28Factory%20New%29"] #MAG-7 Metallic DDPAT
-
-#float cap input
-print("Enter float cap: ")
-float_cap=float(input())
+file = pandas.read_excel("Skins.xlsx") # if no pages are specified, then the last one saved is open
+skins_list = file.values.tolist()
+print(skins_list)
 
 #input delay between tries
 print("Enter delay between tries: ")
@@ -50,16 +41,13 @@ try_delay=int(input())
 
 #Main
 while(1):
-    for url in url_list:
-        try:
-            open_listing(driver, url)
-        except:
-            print("Requests error") 
-            #Requests error means Steam has temporarily blocked current IP address (it is necessary to involve proxy servers in future versions to resolve)
-            sys.exit() 
-        try:
-            find_item(driver, url, float_cap)
-        except:
-            print("Find/Buy error")
-            continue
+    for line in skins_list:
+        
+        name = line[0]
+        url = line[1]
+        float_cap = line[2]
+        #pattern = line[3] #it is possible to search for listing with desired pattern if necessary (need to adjust steam_functions)
+
+        open_listing(driver, url)
+        find_item(driver, url, float_cap)
         time.sleep(try_delay)
