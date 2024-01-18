@@ -23,7 +23,9 @@ Jāpiemin, ka bija uzrakstīti 2 python faili, viens no kuriem satur tikai sekoj
 Pamatprogramma importē šīs funkcijas no otrā faila (tas nodrošina labāku parskatamību un atvieglo modificēšanu).
 ## Izmantošanas metodes un uzlabošanas iespējas
 Programmu var izmantot, lai nopirktu ieroču modeļus ar zemāko float vērtību. Šādi ieroču modeļi tiek augstāk vērtēti spēlētāju lokā, spēles laika izskatās labāk un trešo pusu tīrdzniecības platformās tiek tirgotas par augstāku cenu.
-Programmas kodā var redzēt, ka tā pārbauda tikai katra ieroča modeļa 100 lētākos un jaunākos pārdošanas piedāvājumus. Bija meģinājumi nodrošināt pārslegšanos starp lapām, bet tas gandrīz momentāli noveda pie IP bloķēšanas (pat ar rotating proxy). Iespējams, ka modificējot gaidīšanas laikus šo problēmu varētu novērst
+
+Programmas kodā var redzēt, ka tā pārbauda tikai katra ieroča modeļa 100 lētākos un jaunākos pārdošanas piedāvājumus. Bija meģinājumi nodrošināt pārslegšanos starp lapām, bet tas gandrīz momentāli noveda pie IP bloķēšanas (pat ar rotating proxy). Iespējams, ka modificējot gaidīšanas laikus šo problēmu varētu novērst.
+
 Veicot nelielas izmaiņas *find_item* funkcijas kodā ir iespējams meklēt ne tikai preces ar noteiktu float vērtību, bet arī preces ar noteiktu pattern index. Piemēram šeit ir 2 weapon skins ar vienādu nosaukumu un samērā vienādu float vērtību, bet dažādiem pattern index: ![image](https://github.com/alekssdanielssipicins/cs2-item-parser/assets/144723311/db57da55-8cde-4b32-bfb3-be8beaf09abc)
 ## Videodemonstrācija
 https://youtu.be/n0x13Mp3ps4
