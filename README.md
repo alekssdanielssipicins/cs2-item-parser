@@ -18,6 +18,7 @@ Tas rādīja noteiktas grūtības un bija nepieciešams piesaistīt proksi serve
 2. time - bibliotēka, lai nodrošinātu gaidīšanas laikus starp pieprasījumiem uz serveri
 3. sys - no System bija nepieciešams tikai sys.exit(), lai apstadītu programmu, ja rodas requests error (varētu arī neizmantot bibliotēku, bet kods būtu garāks)
 4. pandas - lai atvieglotu URL un vēlāmas float vērtības nodošanu programmai, bija nolemts noformēt tos .xslx failā. pandas bibliotēka nepieciešama, lai programma varētu nolasīt informāciju no .xslx faila.
+
 Jāpiemin, ka bija uzrakstīti 2 python faili, viens no kuriem satur tikai sekojošās funkcijas: *open_listing* - šī funkcija pieprasa noteiktas preces marketplace lapu, kamēr tā neatveras bez kļūdām (lai gan videodemonstrācijā tas nenotika, bet bieži pieprasot preces lapu notiek kļūda, pat manuālā darba laikā); *find_item* - šī funkcija iegūst visas float vērtības un salīdzina tās ar float_cap, kā arī satur kodu, kas nodrošina preces nopirkšanu; *steam_login* - šī funkcija automātiski ielogojas Steam akauntā un konfigurē SIH paplašinājuma parametrus.
 ## Izmantošanas metodes un uzlabošanas iespējas
 Programmu var izmantot, lai nopirktu ieroču modeļus ar zemāko float vērtību. Šādi ieroču modeļi tiek augstāk vērtēti spēlētāju lokā, spēles laika izskatās labāk un trešo pusu tīrdzniecības platformās tiek tirgotas par augstāku cenu.
