@@ -20,6 +20,7 @@ Tas rādīja noteiktas grūtības un bija nepieciešams piesaistīt proksi serve
 4. pandas - lai atvieglotu URL un vēlāmas float vērtības nodošanu programmai, bija nolemts noformēt tos .xslx failā. pandas bibliotēka nepieciešama, lai programma varētu nolasīt informāciju no .xslx faila.
 
 Jāpiemin, ka bija uzrakstīti 2 python faili, viens no kuriem satur tikai sekojošās funkcijas: *open_listing* - šī funkcija pieprasa noteiktas preces marketplace lapu, kamēr tā neatveras bez kļūdām (lai gan videodemonstrācijā tas nenotika, bet bieži pieprasot preces lapu notiek kļūda, pat manuālā darba laikā); *find_item* - šī funkcija iegūst visas float vērtības un salīdzina tās ar float_cap, kā arī satur kodu, kas nodrošina preces nopirkšanu; *steam_login* - šī funkcija automātiski ielogojas Steam akauntā un konfigurē SIH paplašinājuma parametrus.
+Pamatprogramma importē šīs funkcijas no otrā faila (tas nodrošina labāku parskatamību un atvieglo modificēšanu).
 ## Izmantošanas metodes un uzlabošanas iespējas
 Programmu var izmantot, lai nopirktu ieroču modeļus ar zemāko float vērtību. Šādi ieroču modeļi tiek augstāk vērtēti spēlētāju lokā, spēles laika izskatās labāk un trešo pusu tīrdzniecības platformās tiek tirgotas par augstāku cenu.
 Programmas kodā var redzēt, ka tā pārbauda tikai katra ieroča modeļa 100 lētākos un jaunākos pārdošanas piedāvājumus. Bija meģinājumi nodrošināt pārslegšanos starp lapām, bet tas gandrīz momentāli noveda pie IP bloķēšanas (pat ar rotating proxy). Iespējams, ka modificējot gaidīšanas laikus šo problēmu varētu novērst
